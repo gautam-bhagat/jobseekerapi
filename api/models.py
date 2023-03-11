@@ -43,3 +43,30 @@ class Experience(models.Model):
     isWorking = models.CharField(default="False",max_length=100)
     details = models.TextField(default="null")
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Page(models.Model):
+    page_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
+    profile_pic = models.TextField(default="null")
+    banner_pic = models.TextField(default="null")
+    description = models.TextField(default="null")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class Job(models.Model):
+    job_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    company = models.CharField(max_length=100)
+    position = models.CharField(max_length=100)
+    place = models.CharField(max_length=100)
+    details = models.TextField(default="null")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class Application(models.Model):
+    app_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    job_id = models.ForeignKey(Job, on_delete=models.CASCADE)
+    status = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)

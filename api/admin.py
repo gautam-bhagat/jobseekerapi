@@ -17,3 +17,4 @@ class ExperienceAdmin(admin.ModelAdmin):
 admin.site.register(models.Users,UserAdmin)
 admin.site.register(models.Education,EducationAdmin)
 admin.site.register(models.Experience,ExperienceAdmin)
+admin.site.register(models.Page)

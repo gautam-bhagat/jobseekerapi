@@ -4,12 +4,13 @@ from rest_framework.response import Response
 from .serializers import *
 from .models import *
 
+# ------------------------------URLS--------------------------------------------
 @api_view(['GET'])
 def apiOverview(request):
     urls ={
-
+        'API Overview' : 'add api/ before all the urls' ,
         'Get User' : '/getuser/<email>',
-        'Create User' : '/createuser/',
+        'Create User' : 'createuser/',
         'update User':'updateuser/<pk>',
         'delete user':'deleteuser/<pk>',
         'Get Education':'geteducation/<edu_id>',
@@ -26,6 +27,13 @@ def apiOverview(request):
         'Update Expereince':'update-experience/<exp_id>',
         'Delete Experince':'delete-experience/<edu_id>',
 
+        'Get Page of User':'getpagesofuser/<user_id>',
+        'get page' : 'getpage/<page_id>',
+        'Create Page':'createpage/',
+        'Update Page':'update-page/<page_id>',
+        'Delete Page':'delete-page/<page_id>',
+
+        'Get All Pages':'getallpages/<user_id>',
         
 
     }
@@ -63,7 +71,7 @@ def deleteUser(request,pk):
     user = Users.objects.get(user_id=pk)
     user.delete()
 
-    return Response({"User Deleted": True})
+    return Response({"Deleted": True})
 
 
 
@@ -106,7 +114,7 @@ def deleteEducation(request,edu_id):
     user = Education.objects.get(edu_id=edu_id)
     user.delete()
 
-    return Response({"User Deleted": True})
+    return Response({"Deleted": True})
 
 
 # --------------------------Experience--------------------------------------------
@@ -146,4 +154,123 @@ def deleteExperience(request,exp_id):
     experience = Experience.objects.get(exp_id=exp_id)
     experience.delete()
 
-    return Response({"User Deleted": True})
+    return Response({"Deleted": True})
+
+
+# --------------------------Page--------------------------------------------
+@api_view(['GET'])
+def getPagesOfUser(request,user_id):
+    pages = Page.objects.filter(user_id=user_id)
+    serializer = PageSerializer(pages, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getPage(request,page_id):
+    page = Page.objects.get(page_id=page_id)
+    serializer = PageSerializer(page, many=False)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def createPage(request):
+    serializer = PageSerializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def updatePage(request,page_id):
+    page = Page.objects.get(page_id=page_id)
+    serializer = PageSerializer(instance=page, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+def deletePage(request,page_id):
+    page = Page.objects.get(page_id=page_id)
+    page.delete()
+
+    return Response({"Deleted": True})
+
+# ---------------------------------Job----------------------------
+@api_view(['GET'])
+def getJobsOfUser(request,user_id):
+    jobs = Job.objects.filter(user_id=user_id)
+    serializer = JobSerializer(jobs, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getJob(request,job_id):
+    job = Job.objects.get(job_id=job_id)
+    serializer = JobSerializer(job, many=False)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def createJob(request):
+    serializer = JobSerializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def updateJob(request,job_id):
+    job = Job.objects.get(job_id=job_id)
+    serializer = JobSerializer(instance=job, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+def deleteJob(request,job_id):
+    job = Job.objects.get(job_id=job_id)
+    job.delete()
+
+    return Response({"Deleted": True})
+
+# ------------------------------Application-------------------------------
+@api_view(['GET'])
+def getApplicationsOfUser(request,user_id):
+    applications = Application.objects.filter(user_id=user_id)
+    serializer = ApplicationSerializer(applications, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getApplication(request,app_id):
+    application = Application.objects.get(app_id=app_id)
+    serializer = ApplicationSerializer(application, many=False)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def createApplication(request):
+    serializer = ApplicationSerializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def updateApplication(request,app_id):
+    application = Application.objects.get(app_id=app_id)
+    serializer = ApplicationSerializer(instance=application, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+def deleteApplication(request,app_id):
+    application = Application.objects.get(app_id=app_id)
+    application.delete()
+
+    return Response({"Deleted": True})
+

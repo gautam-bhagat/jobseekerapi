@@ -22,4 +22,10 @@ urlpatterns = [
     path('createexperience',views.createExperience,name="createexperience"),
     path('update-experience/<str:exp_id>',views.updateExperience,name="updateexperience"),
     path('delete-experience/<str:exp_id>',views.deleteExperience,name="deleteexperience"),
+
+    path('getpage/<str:page_id>',views.getPage,name="getpage"),
+    path('getpagesofuser/<str:user_id>',views.getPagesOfUser,name="getpagesofuser"),
+    path('createpage',views.createPage,name="createpage"),
+    path('update-page/<str:page_id>',views.updatePage,name="updatepage"),
+    path('delete-page/<str:page_id>',views.deletePage,name="deletepage"),
 ]
