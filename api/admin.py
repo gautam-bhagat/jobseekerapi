@@ -11,7 +11,7 @@ class EducationAdmin(admin.ModelAdmin):
     list_display = ('edu_id' ,'user_id' ,'school' ,'degree' ,'field_of_study' ,'grade' ,'start_date' ,'end_date' ,'created_at')
 
 class ExperienceAdmin(admin.ModelAdmin):
-    list_display = ('exp_id' ,'user_id' ,'company' ,'position' ,'start_date' ,'end_date' ,'details' ,'created_at')
+    list_display = ('exp_id' ,'user_id' ,'company' ,'position' ,'start_date' ,'end_date'  ,'created_at')
 
 
 admin.site.register(models.Users,UserAdmin)

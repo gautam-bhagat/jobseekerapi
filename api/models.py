@@ -41,7 +41,7 @@ class Experience(models.Model):
     start_date = models.DateField(max_length=100)
     end_date = models.DateField(max_length=100,null=True)
     isWorking = models.CharField(default="False",max_length=100)
-    details = models.TextField(default="null")
+    # details = models.TextField(default="null")
     created_at = models.DateTimeField(auto_now_add=True)
 
 
