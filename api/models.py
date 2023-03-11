@@ -11,7 +11,6 @@ class Users(models.Model):
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
-    pincode = models.CharField(max_length=100)
     profile_pic = models.TextField(default="null")
     banner_pic = models.TextField(default="null")
     github = models.CharField(max_length=100,default="null")
@@ -23,3 +22,24 @@ class Users(models.Model):
         return self.name
 
 
+class Education(models.Model):
+    edu_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    school = models.CharField(max_length=100)
+    degree = models.CharField(max_length=100)
+    field_of_study = models.CharField(max_length=100)
+    grade = models.CharField(max_length=100,default= "null")
+    start_date = models.DateField(max_length=100)
+    end_date = models.DateField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class Experience(models.Model):
+    exp_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    company = models.CharField(max_length=100)
+    position = models.CharField(max_length=100)
+    start_date = models.DateField(max_length=100)
+    end_date = models.DateField(max_length=100,null=True)
+    isWorking = models.CharField(default="False",max_length=100)
+    details = models.TextField(default="null")
+    created_at = models.DateTimeField(auto_now_add=True)
