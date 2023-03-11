@@ -16,4 +16,10 @@ urlpatterns = [
     path('createeducation',views.createEducation,name="createeducation"),
     path('update-education/<str:edu_id>',views.updateEducation,name="updateeducation"),
     path('delete-education/<str:edu_id>',views.deleteEducation,name="deleteeducation"),
+
+    path('getexperience/<str:exp_id>',views.getExperience,name="getexperience"),
+    path('getexperiencesofuser/<str:user_id>',views.getExperiencesOfUser,name="getexperiencesofuser"),
+    path('createexperience',views.createExperience,name="createexperience"),
+    path('update-experience/<str:exp_id>',views.updateExperience,name="updateexperience"),
+    path('delete-experience/<str:exp_id>',views.deleteExperience,name="deleteexperience"),
 ]
