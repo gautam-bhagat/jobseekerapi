@@ -28,4 +28,17 @@ urlpatterns = [
     path('createpage',views.createPage,name="createpage"),
     path('update-page/<str:page_id>',views.updatePage,name="updatepage"),
     path('delete-page/<str:page_id>',views.deletePage,name="deletepage"),
+
+    path('getalljobs',views.getJobsOfUser,name="getalljobs"),
+    path('getjob/<str:job_id>',views.getJob,name="getjob"),
+    path('createjob',views.createJob,name="createjob"),
+    path('update-job/<str:job_id>',views.updateJob,name="updatejob"),
+    path('delete-job/<str:job_id>',views.deleteJob,name="deletejob"),
+
+    path('getallapplications',views.getApplicationsOfUser,name="getallapplications"),
+    path('getapplication/<str:app_id>',views.getApplication,name="getapplication"),
+    path('createapplication',views.createApplication,name="createapplication"),
+    path('update-application/<str:app_id>',views.updateApplication,name="updateapplication"),
+    path('delete-application/<str:app_id>',views.deleteApplication,name="deleteapplication"),
+
 ]
