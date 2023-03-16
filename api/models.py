@@ -3,8 +3,9 @@ from django.db import models
 # Create your models here.
 
 class DEVICE(models.Model):
-    MAC_ID = models.CharField(max_length=100, primary_key=True)
+    MAC_ID = models.CharField(max_length=100)
     AUTH_TOKEN = models.CharField(max_length=100)
+
 
 
 class Users(models.Model):

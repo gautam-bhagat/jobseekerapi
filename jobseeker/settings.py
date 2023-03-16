@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'jobseeker.wsgi.application'
 # }
 
 DATABASES = {
-    "default" : dj_database_url.config(default="postgres://jobseeker_user:PgNUie1ocrOKwKo5qiXkaobDIDC82FRM@dpg-cg6auspmbg5ab7k1ml6g-a.oregon-postgres.render.com/jobseeker", conn_max_age=600, conn_health_checks=True )
+    "default" : dj_database_url.config(default="postgres://jobspace_user:CADydVBNH5wx9snHXKfxdXIbpiIQOL2V@dpg-cg9biokeooghng77m9u0-a.oregon-postgres.render.com/jobspace", conn_max_age=600, conn_health_checks=True )
 }
 
 

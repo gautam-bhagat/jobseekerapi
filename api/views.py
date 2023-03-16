@@ -283,8 +283,7 @@ def deleteApplication(request,app_id):
 
 @api_view(['POST'])
 def addDevice(request, mac_id):
-    print(mac_id)
-    print(request.data)
+    
     token = generate_token()
 
     exist = DEVICE.objects.filter(MAC_ID=mac_id).count()
