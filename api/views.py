@@ -296,3 +296,37 @@ def addDevice(request, mac_id):
     else:
         DEVICE(MAC_ID=mac_id, AUTH_TOKEN=token).save()
         return Response({"AUTH_TOKEN": token})
+
+import numpy as np
+
+def getindices(userskill,companyskill):
+    ind = set()
+    for i in userskill:
+        print(i)
+        for j in companyskill:
+            if i in j:
+                print("in jjj")
+                print(companyskill.index(j))
+                ind.add(companyskill.index(j))
+    
+    return list(ind)
+
+
+@api_view(['GET'])
+def getRecommendations(request, user_id):
+    user = Users.objects.get(user_id=user_id)
+    userskill =  user.skills
+    userskill = userskill.split("|")
+    userskill = [i.strip().lower() for i in userskill]
+
+    jobs = Job.objects.all()
+    jobs = np.array(list(jobs.values()))
+    companyskills = [i.get("key_skills") for i in jobs]
+    companyskills = [ i.split("|") for i in companyskills ]
+    companyskills = [ [j.strip().lower() for j in i] for i in companyskills ]
+    
+    print(companyskills)
+    ind = getindices(userskill,companyskills)
+    print(ind)
+    recommend = jobs[ind]
+    return Response(recommend)

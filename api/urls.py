@@ -42,4 +42,5 @@ urlpatterns = [
     path('delete-application/<str:app_id>',views.deleteApplication,name="deleteapplication"),
 
     path('adddevice/<str:mac_id>',views.addDevice,name="adddevice"),
+    path('recommendations/<user_id>',views.getRecommendations,name="recommendations")
 ]
