@@ -3,6 +3,12 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import *
 from .models import *
+import secrets
+
+
+def generate_token():
+    return secrets.token_urlsafe(32)
+
 
 # ------------------------------URLS--------------------------------------------
 @api_view(['GET'])
@@ -274,3 +280,20 @@ def deleteApplication(request,app_id):
 
     return Response({"Deleted": True})
 
+
+@api_view(['POST'])
+def addDevice(request, mac_id):
+    print(mac_id)
+    print(request.data)
+    token = generate_token()
+
+    exist = DEVICE.objects.filter(MAC_ID=mac_id).count()
+    print(exist)
+    if exist:
+        device = DEVICE.objects.get(MAC_ID=mac_id)
+        device.AUTH_TOKEN = token
+        device.save()
+        return Response({"AUTH_TOKEN":token })
+    else:
+        DEVICE(MAC_ID=mac_id, AUTH_TOKEN=token).save()
+        return Response({"AUTH_TOKEN": token})

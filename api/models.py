@@ -1,6 +1,12 @@
 from django.db import models
 
 # Create your models here.
+
+class DEVICE(models.Model):
+    MAC_ID = models.CharField(max_length=100, primary_key=True)
+    AUTH_TOKEN = models.CharField(max_length=100)
+
+
 class Users(models.Model):
 
     user_id = models.AutoField(primary_key=True)
@@ -11,11 +17,13 @@ class Users(models.Model):
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
+    skills = models.TextField(blank=True,null=True)
     profile_pic = models.TextField(default="null")
     banner_pic = models.TextField(default="null")
     github = models.CharField(max_length=100,default="null")
     leetcode = models.CharField(max_length=100,default="null")
     codechef = models.CharField(max_length=100,default="null")
+    organization = models.CharField(max_length=100,default="0")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -60,6 +68,8 @@ class Job(models.Model):
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
     company = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
+    salary = models.CharField(max_length=100)
+    key_skills = models.TextField(default="null")
     place = models.CharField(max_length=100)
     details = models.TextField(default="null")
     created_at = models.DateTimeField(auto_now_add=True)

@@ -41,4 +41,5 @@ urlpatterns = [
     path('update-application/<str:app_id>',views.updateApplication,name="updateapplication"),
     path('delete-application/<str:app_id>',views.deleteApplication,name="deleteapplication"),
 
+    path('adddevice/<str:mac_id>',views.addDevice,name="adddevice"),
 ]
