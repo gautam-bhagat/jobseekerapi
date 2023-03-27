@@ -45,6 +45,9 @@ urlpatterns = [
     path('recommendations/<user_id>',views.getRecommendations,name="recommendations"),
 
     path('newroom',views.newRoom,name="newroom"),
-    path('newteam',views.newTeam,name="newroom"),
+    path('newteam',views.newTeam,name="newteam"),
     path('rooms',views.allRoom,name="rooms"),
+    path('teams',views.allTeam,name="teams"),
+    path('buzzer/<str:room_name>',views.buzzerstats,name="buzzer"),
+    path('clrbuzzer/',views.clrbuzzer,name="clrbuzzer"),
 ]

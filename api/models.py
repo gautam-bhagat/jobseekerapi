@@ -87,7 +87,14 @@ class Room(models.Model):
     room_name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+       return self.room_name
+
 class Team(models.Model):
-    room_name = models.ForeignKey(Room, on_delete=models.CASCADE)
+    id = models.AutoField(primary_key=True)
+    room_name = models.CharField(max_length=50)
     team_name =  models.CharField(max_length=100)
-    timestamp = models.CharField(max_length=100)
+    timestamp = models.BigIntegerField()
+
+    def __str__(self):
+       return self.team_name

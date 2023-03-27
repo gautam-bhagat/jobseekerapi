@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import *
@@ -13,6 +13,9 @@ def generate_token():
 # ------------------------------URLS--------------------------------------------
 @api_view(['GET'])
 def apiOverview(request):
+    t = Team.objects.filter(room_name="9837a41",team_name="musky").values()
+    # t.timestamp = "2021-05-01 00:00:00"
+    print(len(t))
     urls ={
         'API Overview' : 'add api/ before all the urls' ,
         'Get User' : '/getuser/<email>',
@@ -342,14 +345,51 @@ def newRoom(request):
 @api_view(['POST'])
 def newTeam(request):
     serializer = TeamSerializer(data=request.data)
-    saved = 0
-    if serializer.is_valid():
-        saved = 1
-        serializer.save()
-    return Response({"created": saved})
+    team = str(request.data.get("team_name"))
+    room = str(request.data.get("room_name"))
+    time = str(request.data.get("timestamp"))
+
+    print(team)
+    print(room)
+    
+    t = Team.objects.filter(room_name=room,team_name=team).values()
+    print(t)
+    if len(t) > 0:
+            t = Team.objects.filter(room_name=room,team_name=team).update(timestamp=time)
+            print(t)
+            if serializer.is_valid():
+                pass
+                # serializer.save()
+            return Response(serializer.data)
+    else :
+            saved = 0
+            if serializer.is_valid():
+                saved = 1
+                serializer.save()
+            return Response(serializer.data)
+    
 
 @api_view(['GET'])
 def allRoom(request):
     rooms = Room.objects.all()
     serializer = RoomSerializer(rooms, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def allTeam(request):
+    teams = Team.objects.all()
+    serializer = TeamSerializer(teams, many=True)
+    return Response(serializer.data)
+
+def buzzerstats(request,room_name) :
+    teams = Team.objects.filter(room_name=room_name,timestamp__gt=0).order_by("timestamp").values()
+    print(teams)
+    return render(request, 'buzzerround.html', {'teams': teams,'room_name':room_name})
+
+
+def clrbuzzer(request) :
+    room = request.GET["room_name"]
+    print("room name is ",room)
+    teams = Team.objects.filter(room_name=room).update(timestamp=0)
+    print(teams)
+    return redirect('buzzer',room_name=room)
