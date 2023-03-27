@@ -330,3 +330,16 @@ def getRecommendations(request, user_id):
     print(ind)
     recommend = jobs[ind]
     return Response(recommend)
+
+@api_view(['POST'])
+def newRoom(request):
+    serializer = RoomSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def allRoom(request):
+    rooms = Room.objects.all()
+    serializer = RoomSerializer(rooms, many=True)
+    return Response(serializer.data)

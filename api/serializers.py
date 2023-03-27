@@ -1,4 +1,4 @@
-from .models import Users,Education,Experience,Page,Job,Application,DEVICE
+from .models import Users,Education,Experience,Page,Job,Application,DEVICE,Room,Team
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -34,4 +34,14 @@ class ApplicationSerializer(serializers.ModelSerializer):
 class DeviceSerializer(serializers.ModelSerializer):
     class Meta:
         model = DEVICE
+        fields = '__all__'
+
+class RoomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Room
+        fields = '__all__'
+
+class TeamSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Team
         fields = '__all__'

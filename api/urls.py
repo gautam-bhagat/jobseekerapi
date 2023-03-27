@@ -42,5 +42,8 @@ urlpatterns = [
     path('delete-application/<str:app_id>',views.deleteApplication,name="deleteapplication"),
 
     path('adddevice/<str:mac_id>',views.addDevice,name="adddevice"),
-    path('recommendations/<user_id>',views.getRecommendations,name="recommendations")
+    path('recommendations/<user_id>',views.getRecommendations,name="recommendations"),
+
+    path('newroom',views.newRoom,name="newroom"),
+    path('rooms',views.allRoom,name="rooms"),
 ]
