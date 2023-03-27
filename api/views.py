@@ -338,6 +338,16 @@ def newRoom(request):
         serializer.save()
     return Response(serializer.data)
 
+
+@api_view(['POST'])
+def newTeam(request):
+    serializer = TeamSerializer(data=request.data)
+    saved = 0
+    if serializer.is_valid():
+        saved = 1
+        serializer.save()
+    return Response({"created": saved})
+
 @api_view(['GET'])
 def allRoom(request):
     rooms = Room.objects.all()
