@@ -81,3 +81,13 @@ class Application(models.Model):
     job_id = models.ForeignKey(Job, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Room(models.Model):
+    room_name = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class Team(models.Model):
+    room_name = models.ForeignKey(Room, on_delete=models.CASCADE)
+    team_name =  models.CharField(max_length=100)
+    timestamp = models.CharField(max_length=100)
