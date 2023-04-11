@@ -353,14 +353,21 @@ def newTeam(request):
     print(room)
     
     t = Team.objects.filter(room_name=room,team_name=team).values()
-    print(t)
+    # print(t)
     if len(t) > 0:
             t = Team.objects.filter(room_name=room,team_name=team).update(timestamp=time)
-            print(t)
+            # print(t)
             if serializer.is_valid():
-                pass
+                if int(time) > 0:
+                    teams = Team.objects.filter(room_name=room,timestamp__gt=0).order_by("timestamp").values()
+                    no = ([i for i, d in enumerate(teams) if team in d.values()][0]) + 1
+                    # print(no)
+                    dict = {'rank' : no,'saved' : 1}
+                else:
+                    dict = {'rank' : 0,'saved' : 1}
                 # serializer.save()
-            return Response(serializer.data)
+                print(dict)
+            return Response(dict)
     else :
             saved = 0
             if serializer.is_valid():
@@ -384,6 +391,7 @@ def allTeam(request):
 def buzzerstats(request,room_name) :
     teams = Team.objects.filter(room_name=room_name,timestamp__gt=0).order_by("timestamp").values()
     print(teams)
+    # print(([i for i, d in enumerate(teams) if 'Ji' in d.values()][0])+1)
     return render(request, 'buzzerround.html', {'teams': teams,'room_name':room_name})
 
 
