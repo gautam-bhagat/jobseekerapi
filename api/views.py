@@ -358,16 +358,8 @@ def newTeam(request):
             t = Team.objects.filter(room_name=room,team_name=team).update(timestamp=time)
             # print(t)
             if serializer.is_valid():
-                if int(time) > 0:
-                    teams = Team.objects.filter(room_name=room,timestamp__gt=0).order_by("timestamp").values()
-                    no = ([i for i, d in enumerate(teams) if team in d.values()][0]) + 1
-                    # print(no)
-                    dict = {'rank' : no,'saved' : 1}
-                else:
-                    dict = {'rank' : 0,'saved' : 1}
-                # serializer.save()
-                print(dict)
-            return Response(dict)
+                pass
+            return Response(serializer.data)
     else :
             saved = 0
             if serializer.is_valid():
